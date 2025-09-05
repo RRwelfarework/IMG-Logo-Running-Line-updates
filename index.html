@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Galaxy News Ticker</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      padding: 0;
+      margin: 0;
+    }
+
+    body {
+      font-family: 'Monotype Corsiva', cursive, sans-serif;
+      background: #00000000;
+      color: #fff;
+    }
+
+    .news-ticker-container {
+      background: url('') center/cover no-repeat;
+      overflow: hidden;
+      border-top: 3px solid #FFA000;
+      border-bottom: 3px solid #FFA000;
+      position: relative;
+      z-index: 2;
+      backdrop-filter: brightness(0.5) blur(2px);
+    }
+
+    .news-ticker-wrapper {
+      display: flex;
+      align-items: center;
+    }
+
+    /* Logo Section (left side) */
+    .news-ticker-logo {
+      background: #FFA000;
+      padding: 8px 15px;
+      border-right: 2px solid #fff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .news-ticker-logo img {
+      height: 40px;
+      width: auto;
+      display: block;
+    }
+
+    .ticker-track {
+      display: flex;
+      flex: 1;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .news-ticker {
+      display: flex;
+      animation: scroll 40s linear infinite;
+    }
+
+    .news-ticker a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-right: 80px;
+    }
+
+    .ticker-logo {
+      height: 40px;
+      width: auto;
+      filter: drop-shadow(0 0 5px #FFA000);
+      transition: transform 0.3s ease, filter 0.3s ease;
+    }
+
+    .ticker-logo:hover {
+      transform: scale(1.1);
+      filter: drop-shadow(0 0 12px #fff);
+    }
+
+    @keyframes scroll {
+      0% {
+        transform: translateX(0);
+      }
+      100% {
+        transform: translateX(-50%);
+      }
+    }
+
+    .news-ticker-container:hover .news-ticker {
+      animation-play-state: paused;
+    }
+
+    @media (max-width: 768px) {
+      .news-ticker-logo img {
+        height: 28px;
+      }
+
+      .ticker-logo {
+        height: 28px;
+        margin-right: 40px;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .news-ticker-logo {
+        display: none;
+      }
+
+      .ticker-logo {
+        height: 22px;
+        margin-right: 25px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="news-ticker-container">
+    <div class="news-ticker-wrapper">
+      <!-- Replace heading with logo -->
+      <div class="news-ticker-logo">
+        <img src="./Picture-1.png" alt="Main Logo">
+      </div>
+
+      <div class="ticker-track">
+        <div class="news-ticker" id="newsTicker">
+          <!-- Content will be injected via JavaScript -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const newsItems = [
+      //{ img: "logo1.png", link: "https://sites.google.com/view/journal-of-remote-sensing/news-update-line/1st-news-update" },
+      { img: "./Picture1.png", link: "https://sites.google.com/view/journal-of-remote-sensing/news-update-line/2nd-news-update" },
+      { img: "./Picture3.png", link: "https://sites.google.com/view/journal-of-remote-sensing/news-update-line/3rd-news-update" },
+      { img: "./Picture4.png", link: "https://sites.google.com/view/journal-of-remote-sensing/news-update-line/4th-news-update" },
+      //{ img: "logo5.png", link: "https://sites.google.com/view/journal-of-remote-sensing/news-update-line/5th-news-update" },
+      //{ img: "logo6.png", link: "https://sites.google.com/view/journal-of-remote-sensing/news-update-line/6th-news-update" }
+    ];
+
+    const ticker = document.getElementById("newsTicker");
+
+    // Duplicate items for seamless scrolling
+    const allItems = newsItems.concat(newsItems);
+
+    ticker.innerHTML = allItems.map(item => 
+      `<a href="${item.link}" target="_blank"><img src="${item.img}" alt="logo" class="ticker-logo"></a>`
+    ).join('');
+  </script>
+
+</body>
+</html>
